@@ -21,10 +21,9 @@
    PICTURE: 장마다 하나의 단면 도해, 물질 입자가 실제 경로를 흐르고 단계마다 해당 부위가 밝아짐
    COLOUR and TYPE: 잎 녹색 주조, 흙 갈색 보조, 당의 호박색 강조 / Gothic A1 + Noto Sans KR
    LAYOUT: 장 선택 줄 → 도해·단계 자막 왼쪽, 정의·단계 목록 오른쪽 / 좁으면 위아래 */
-:root{color-scheme:light dark;
---bg:light-dark(#ffffff,#0e1712);--ink:light-dark(#15241a,#e6efe8);--mute:light-dark(#4d5e52,#a8b8ad);
---band:light-dark(#2f7d4a,#16301f);--bandInk:#f4fbf5;--line:light-dark(#d9e4dc,#27392d);
---card:light-dark(#f2f7f3,#15221a);--chip:light-dark(#ffffff,#1a2a20);--amber:#f2a33a;--on:light-dark(#2f7d4a,#7cc98a)}
+:root{color-scheme:light dark;--bg:#ffffff;--ink:#15241a;--mute:#4d5e52;--band:#2f7d4a;--line:#d9e4dc;--card:#f2f7f3;--chip:#ffffff;--on:#2f7d4a;--bandInk:#f4fbf5;--amber:#f2a33a}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#0e1712;--ink:#e6efe8;--mute:#a8b8ad;--band:#16301f;--line:#27392d;--card:#15221a;--chip:#1a2a20;--on:#7cc98a}}
+:root[data-theme=dark]{--bg:#0e1712;--ink:#e6efe8;--mute:#a8b8ad;--band:#16301f;--line:#27392d;--card:#15221a;--chip:#1a2a20;--on:#7cc98a}
 :root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
 *{box-sizing:border-box;min-width:0}
 body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 "Noto Sans KR",system-ui,sans-serif;overflow-x:clip}
@@ -173,12 +172,85 @@ svg[data-st=real] #depth,svg[data-st=real] #spread{opacity:1}svg[data-st=why] #h
  .tabs button[aria-current=true]{color:var(--on);font-weight:700}
  .ctrl{position:sticky;bottom:64px;z-index:20;background:var(--bg);padding:6px 0}
 }
+
+/* UI v2 — mobile first, all devices */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{-webkit-tap-highlight-color:transparent}
+button{touch-action:manipulation;-webkit-user-select:none;user-select:none}
+.fig{position:relative;box-shadow:0 1px 0 var(--line),0 8px 24px -16px rgba(20,50,30,.35)}
+.zoomb{position:absolute;right:10px;top:10px;min-height:36px;padding:0 12px;border-radius:18px;font-size:13px;background:rgba(255,255,255,.92);color:#17361f;border:1px solid #cfdcd3;display:none}
+.zoomv{position:fixed;inset:0;z-index:70;background:#0c140f;display:none;flex-direction:column}
+.zoomv.open{display:flex}
+.zoomv header{display:flex;align-items:center;gap:8px;padding:calc(env(safe-area-inset-top) + 6px) calc(env(safe-area-inset-right) + 10px) 6px calc(env(safe-area-inset-left) + 10px);color:#e6efe8}
+.zoomv header b{flex:1;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.zoomv header button{min-height:40px;border-radius:20px;background:#1d2b22;color:#e6efe8;border-color:#2c3d31}
+.zoomv .zs{flex:1;overflow:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;padding-bottom:env(safe-area-inset-bottom)}
+.zoomv .zs>div{background:#eef5f0;margin:0 auto}
+.zoomv svg{display:block;width:100%;height:auto}
+.zoomv p{margin:0;padding:8px 14px calc(env(safe-area-inset-bottom) + 10px);color:#a8b8ad;font-size:13px;text-align:center}
+.chip-part{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.02em;color:var(--on);background:var(--card);border-radius:20px;padding:3px 10px;margin-bottom:8px}
+.tbar .tbt{flex:1;min-width:0;text-align:center;line-height:1.15}
+.tbar .tbt small{display:block;font-size:11px;opacity:.8;font-weight:500}
+.tprog{position:absolute;left:0;bottom:0;height:3px;background:var(--amber);transition:width .4s}
+.stepn{font-variant-numeric:tabular-nums;font-size:13px;color:var(--mute);margin-left:auto}
+@media(max-width:900px){
+ header.band{display:none}
+ .hint{display:none!important}
+ .fig{overflow:hidden;border-radius:16px}
+ .fig svg{width:100%!important;max-width:100%!important}
+ .zoomb{display:block}
+ .wrap{max-width:720px}
+ main.band{padding:calc(env(safe-area-inset-top) + 66px) calc(env(safe-area-inset-right) + 14px) 120px calc(env(safe-area-inset-left) + 14px)}
+ .glb{padding:28px calc(env(safe-area-inset-right) + 14px) calc(env(safe-area-inset-bottom) + 96px) calc(env(safe-area-inset-left) + 14px)}
+ .tbar{display:flex;position:fixed;top:0;left:0;right:0;z-index:30;align-items:center;gap:2px;background:var(--band);color:var(--bandInk);padding:calc(env(safe-area-inset-top) + 4px) calc(env(safe-area-inset-right) + 4px) 6px calc(env(safe-area-inset-left) + 4px)}
+ .tbar button{background:transparent;color:var(--bandInk);border:none;min-height:44px;min-width:44px;padding:0;font-size:24px}
+ .tbar b{font:700 16px "Gothic A1",sans-serif;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+ .tabs{display:grid;grid-template-columns:repeat(4,1fr);position:fixed;left:0;right:0;bottom:0;z-index:50;background:color-mix(in srgb,var(--bg) 92%,transparent);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-top:1px solid var(--line);padding:0 env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}
+ @supports not (background:color-mix(in srgb,red 50%,blue)){.tabs{background:var(--bg)}}
+ .tabs button{border:none;border-radius:0;background:transparent;min-height:56px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:11.5px;color:var(--mute);padding:0}
+ .tabs button i{font-style:normal;font-size:19px;line-height:1}
+ .tabs button[aria-current=true]{color:var(--on);font-weight:700;background:transparent}
+ .cap{min-height:0;margin-top:14px}
+ .cap b{font-size:17px}
+ .ctrl{position:sticky;bottom:calc(env(safe-area-inset-bottom) + 64px);z-index:20;margin:12px -4px 0;padding:6px;border-radius:16px;background:var(--card);border:1px solid var(--line);flex-wrap:nowrap;gap:6px;box-shadow:0 8px 20px -12px rgba(0,0,0,.35)}
+ .ctrl button{min-height:44px;flex:none;padding:0 14px;font-size:15px}
+ .ctrl #play{flex:1}
+ .dots{display:none}
+ h2{font-size:24px;margin:22px 0 12px}
+ .def{border-radius:16px}
+ .steps button{min-height:48px}
+ .sheet{padding-left:calc(env(safe-area-inset-left) + 16px);padding-right:calc(env(safe-area-inset-right) + 16px)}
+}
+/* small phones: Galaxy Fold cover, iPhone SE/mini, Galaxy A */
+@media(max-width:374px){
+ body{font-size:15px}
+ main.band{padding-left:10px;padding-right:10px}
+ .tabs button{font-size:10.5px}
+ .ctrl button{padding:0 10px;font-size:14px}
+ .tbar b{font-size:15px}
+}
+/* phones in landscape: picture beside text */
+@media(max-width:950px) and (max-height:500px) and (orientation:landscape){
+ main.band{padding-top:calc(env(safe-area-inset-top) + 54px)}
+ .tbar{padding-top:2px;padding-bottom:2px}
+ .wrap{max-width:none;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr)!important}
+ .wrap>div:first-child{position:sticky;top:54px}
+ .tabs button{min-height:44px;flex-direction:row;gap:6px}
+ .ctrl{position:static;margin-top:8px}
+ .wrap>div:first-child{max-height:calc(100vh - 110px);overflow:auto}
+}
+/* unfolded foldables / tablets portrait */
+@media(min-width:600px) and (max-width:900px) and (min-height:501px){
+ .wrap{max-width:760px}
+ .tabs{max-width:none}
+}
 </style>
 </head>
 <body>
-<div class="tbar"><button id="tbPrev" aria-label="이전 장">‹</button><b id="tbT"></b><button id="tbNext" aria-label="다음 장">›</button></div>
+<div class="tbar"><button id="tbPrev" aria-label="이전 장">‹</button><div class="tbt"><small id="tbS"></small><b id="tbT"></b></div><i class="tprog" id="tbP"></i><button id="tbNext" aria-label="다음 장">›</button></div>
 <div class="sheet" id="shToc" role="dialog" aria-label="목차"><h2>목차</h2><input id="tocQ" type="search" placeholder="장 찾기 (예: 단풍, 균근)" aria-label="장 찾기"><div id="tocL"></div></div>
 <div class="sheet" id="shMe" role="dialog" aria-label="내 기록"><h2>내 기록</h2><div id="meL"></div></div>
+<div class="zoomv" id="zoomV" role="dialog" aria-label="그림 크게 보기"><header><b id="zoomT"></b><button id="zoomI">＋</button><button id="zoomO">－</button><button id="zoomX">닫기</button></header><div class="zs"><div id="zoomC"></div></div><p>가로로 돌리면 더 크게 보여요 · 손가락으로 밀어 움직여요</p></div>
 <nav class="tabs" aria-label="앱 메뉴"><button data-tab="read"><i>📖</i>읽기</button><button data-tab="toc"><i>☰</i>목차</button><button data-tab="gl"><i>🔎</i>용어</button><button data-tab="me"><i>★</i>내 기록</button></nav>
 <header class="band">
   <h1>식물학 책</h1>
@@ -190,13 +262,13 @@ svg[data-st=real] #depth,svg[data-st=real] #spread{opacity:1}svg[data-st=why] #h
 <main class="band">
 <div class="wrap">
   <div>
-    <div class="fig" id="fig"></div>
+    <div style="position:relative"><div class="fig" id="fig"></div><button class="zoomb" id="zoomB" aria-label="그림 크게 보기">⤢ 크게</button></div>
     <p class="hint">그림을 옆으로 밀어 전체를 볼 수 있어요.</p>
     <div class="cap" aria-live="polite"><b id="capT"></b><span id="capC"></span></div>
     <div class="ctrl">
       <button id="prev" aria-label="이전 단계">이전</button>
       <button id="play">일시정지</button>
-      <button id="next" aria-label="다음 단계">다음</button>
+      <button id="next" aria-label="다음 단계">다음</button><span class="stepn" id="stepN"></span>
       <div class="dots" id="dots"></div>
     </div>
     <div class="legend" id="legend"></div>
@@ -1626,6 +1698,7 @@ function setStep(i){
   $('capT').textContent=`${si+1}. ${st.t}`;$('capC').textContent=st.c;
   [...$('steps').querySelectorAll('button')].forEach((b,j)=>b.setAttribute('aria-current',j===si));
   [...$('dots').children].forEach((d,j)=>d.classList.toggle('on',j===si));
+  {const n=$('stepN');if(n)n.textContent=`${si+1}/${sc.steps.length}`}
   draw();
 }
 function draw(){
@@ -1658,8 +1731,8 @@ function frame(now){const dt=Math.min(.05,(now-last)/1000);last=now;
  function closeAll(){Object.values(sheets).forEach(s=>s.classList.remove('open'));document.body.style.overflow='';setTab('read')}
  const star=id=>`<button class="star" data-star="${id}" aria-label="북마크">${S.star[id]?'★':'☆'}</button>`;
  window.onChap=s=>{S.seen[s.id]=Date.now();S.last=s.id;save();
-  $('title').innerHTML=`<span>${s.title}</span>${star(s.id)}`;
-  $('tbT').textContent=s.nav;document.title=s.nav+' · 식물학 책'};
+  $('title').innerHTML=`<span>${s.title}</span>${star(s.id)}`;$('title').insertAdjacentHTML('beforebegin','');{let c=$('pchip');if(!c){c=document.createElement('span');c.id='pchip';c.className='chip-part';$('title').before(c)}c.textContent=PARTS[s.part]}
+  $('tbT').textContent=s.nav;{const i=ORD.indexOf(s.id);$('tbS').textContent=`${PARTS[s.part]} · ${i}/${ORD.length-1}`;$('tbP').style.width=`${i/(ORD.length-1)*100}%`}document.title=s.nav+' · 식물학 책'};
  const tocItem=s=>`<button data-go2="${s.id}" class="${sc&&sc.id===s.id?'cur':''}"><span>${S.star[s.id]?'★ ':''}${s.nav}</span><small>${S.seen[s.id]?'✓ 읽음':''}</small></button>`;
  function drawToc(q=''){
   $('tocL').innerHTML=[0,1,2,3,4].map(n=>{const L=SC.filter(s=>s.part===n&&(!q||s.nav.includes(q)||s.title.includes(q)||s.def.includes(q)));if(!L.length)return'';
@@ -1689,6 +1762,22 @@ function frame(now){const dt=Math.min(.05,(now-last)/1000);last=now;
  addEventListener('keydown',e=>{if(e.key==='Escape')closeAll()});
  if(!location.hash&&S.last)history.replaceState(null,'','#'+S.last);
  setTab('read');
+}
+
+{let z=1;const V=$('zoomV'),C=$('zoomC');
+ const fit=()=>{C.style.width=Math.round(Math.max(innerWidth,Math.min(innerWidth*z,2400)))+'px'};
+ const openZ=()=>{z=innerWidth<innerHeight?2:1;C.innerHTML='';const s=svg.cloneNode(true);s.removeAttribute('style');C.appendChild(s);
+  $('zoomT').textContent=$('capT').textContent;fit();V.classList.add('open');document.body.style.overflow='hidden'};
+ const closeZ=()=>{V.classList.remove('open');C.innerHTML='';document.body.style.overflow=''};
+ $('zoomB').addEventListener('click',openZ);$('zoomX').addEventListener('click',closeZ);
+ $('zoomI').addEventListener('click',()=>{z=Math.min(z+.5,4);fit()});$('zoomO').addEventListener('click',()=>{z=Math.max(z-.5,1);fit()});
+ addEventListener('resize',()=>{if(V.classList.contains('open'))fit()});
+ addEventListener('keydown',e=>{if(e.key==='Escape')closeZ()});
+ // swipe on figure = step
+ let x0=null,y0=0;const F=$('fig');
+ F.addEventListener('touchstart',e=>{const t=e.touches[0];x0=t.clientX;y0=t.clientY},{passive:true});
+ F.addEventListener('touchend',e=>{if(x0===null)return;const t=e.changedTouches[0],dx=t.clientX-x0,dy=t.clientY-y0;x0=null;
+  if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy)*1.5)setStep(si+(dx<0?1:-1))},{passive:true});
 }
 route();requestAnimationFrame(frame);
 }
