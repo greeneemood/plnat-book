@@ -246,8 +246,8 @@ button{touch-action:manipulation;-webkit-user-select:none;user-select:none}
 }
 
 /* v3 — editorial skin */
-:root{--bg:#f3f2ef;--ink:#121212;--mute:#6b6b66;--line:#e2e0da;--card:#ffffff;--chip:#ffffff;--on:#ef5b37;--acc:#ef5b37;--band:#121212}
-@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#111110;--ink:#f1f0ec;--mute:#a19f98;--line:#2a2a27;--card:#1c1c1a;--chip:#1c1c1a;--on:#ff7a55;--acc:#ff7a55;--band:#000}}
+:root{--bg:#f3f2ef;--ink:#121212;--mute:#6b6b66;--line:#e2e0da;--card:#ffffff;--chip:#ffffff;--on:#2c7a4b;--acc:#2c7a4b;--band:#121212}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#111110;--ink:#f1f0ec;--mute:#a19f98;--line:#2a2a27;--card:#1c1c1a;--chip:#1c1c1a;--on:#7cc98a;--acc:#7cc98a;--band:#000}}
 body{letter-spacing:-.01em}
 h2,#title{word-break:keep-all;font-family:"Gothic A1",sans-serif;font-weight:800;letter-spacing:-.03em}
 .def,.steps button,.fig{border:none}
@@ -279,7 +279,21 @@ h2,#title{word-break:keep-all;font-family:"Gothic A1",sans-serif;font-weight:800
 .hc-t{display:flex;justify-content:space-between;align-items:flex-start;font-size:11.5px;color:var(--mute)}
 .hc-t small{font-size:11.5px;line-height:1.3}.hc-t i{font-style:normal;font-size:14px}
 .hc b{font:800 21px/1.12 "Gothic A1",sans-serif;letter-spacing:-.035em;word-break:keep-all}
-.hc.hot{background:var(--pc);color:#fff}.hc.hot .hc-t{color:rgba(255,255,255,.8)}
+
+.hm-hero{background:var(--acc);color:#fff;margin:calc(-1 * (env(safe-area-inset-top) + 14px)) -16px 14px;padding:calc(env(safe-area-inset-top) + 18px) 16px 18px;border-radius:0 0 30px 30px}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]) .hm-hero{background:#1e3a28}}
+.hm-hero .hm-top small{color:rgba(255,255,255,.75)}
+.hm-hero .hm-x{background:rgba(255,255,255,.18);color:#fff}
+.hm-hero .hm-num,.hm-hero .hm-num span{color:#fff}.hm-hero .hm-num em{color:rgba(255,255,255,.75)}
+.hm-hero .hm-q{background:rgba(255,255,255,.16);margin:0}.hm-hero .hm-q i{color:rgba(255,255,255,.8)}
+.sheet .hm-hero .hm-q input{color:#fff}.hm-hero .hm-q input::placeholder{color:rgba(255,255,255,.7)}
+.hm-s{grid-column:1/-1;display:flex;justify-content:space-between;align-items:baseline;margin:18px 2px 2px}
+.hm-s b{font:800 20px "Gothic A1",sans-serif;letter-spacing:-.03em}.hm-s span{font-size:13px;color:var(--mute);font-variant-numeric:tabular-nums}
+.hc{min-height:118px}
+.hc.feat{grid-column:1/-1;min-height:150px;background:var(--ink);color:var(--bg)}
+.hc.feat .hc-t{color:var(--acc);font-weight:700}.hc.feat b{font-size:28px}.hc.feat em{font-style:normal;font-size:13px;opacity:.7;margin-top:4px}
+.hc-t i{color:var(--acc)}
+
 .hc.cur{outline:2.5px solid var(--acc);outline-offset:-2.5px}
 @media(max-width:900px){
  .tbar{background:color-mix(in srgb,var(--bg) 88%,transparent);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);color:var(--ink)}
@@ -305,7 +319,7 @@ h2,#title{word-break:keep-all;font-family:"Gothic A1",sans-serif;font-weight:800
 </head>
 <body>
 <div class="tbar"><button id="tbPrev" aria-label="이전 장">‹</button><div class="tbt"><small id="tbS"></small><b id="tbT"></b></div><i class="tprog" id="tbP"></i><button id="tbNext" aria-label="다음 장">›</button></div>
-<div class="sheet" id="shToc" role="dialog" aria-label="목차"><div class="hm-top"><div><small>Plant Book</small><h2>식물학 책</h2></div><button class="hm-x" id="hmX" aria-label="닫기">✕</button></div><div class="hm-num"><b id="hmN"></b><span>개의 장<br><em id="hmR"></em></span></div><label class="hm-q"><i>⌕</i><input id="tocQ" type="search" placeholder="무엇이 궁금해요? (단풍, 균근…)" aria-label="장 찾기"></label><div class="hm-f" id="hmF"></div><div id="tocL" class="hm-g"></div></div>
+<div class="sheet" id="shToc" role="dialog" aria-label="목차"><div class="hm-hero"><div class="hm-top"><div><small>Plant Book</small><h2>식물학 책</h2></div><button class="hm-x" id="hmX" aria-label="닫기">✕</button></div><div class="hm-num"><b id="hmN"></b><span>개의 장<br><em id="hmR"></em></span></div><label class="hm-q"><i>⌕</i><input id="tocQ" type="search" placeholder="무엇이 궁금해요? (단풍, 균근…)" aria-label="장 찾기"></label></div><div class="hm-f" id="hmF"></div><div id="tocL" class="hm-g"></div></div>
 <div class="sheet" id="shMe" role="dialog" aria-label="내 기록"><h2>내 기록</h2><div id="meL"></div></div>
 <div class="zoomv" id="zoomV" role="dialog" aria-label="그림 크게 보기"><header><b id="zoomT"></b><button id="zoomI">＋</button><button id="zoomO">－</button><button id="zoomX">닫기</button></header><div class="zs"><div id="zoomC"></div></div><p>가로로 돌리면 더 크게 보여요 · 손가락으로 밀어 움직여요</p></div>
 <nav class="tabs" aria-label="앱 메뉴"><button data-tab="toc" class="pk">목차 <i id="tabN"></i></button><button data-tab="read">읽기</button><button data-tab="gl">용어</button><button data-tab="me">기록</button></nav>
@@ -1759,14 +1773,20 @@ function frame(now){const dt=Math.min(.05,(now-last)/1000);last=now;
   $('title').innerHTML=`<span>${s.title}</span>${star(s.id)}`;$('title').insertAdjacentHTML('beforebegin','');{let c=$('pchip');if(!c){c=document.createElement('span');c.id='pchip';c.className='chip-part';$('title').before(c)}c.textContent=PARTS[s.part]}
   $('tbT').textContent=s.nav;{const i=ORD.indexOf(s.id);$('tbS').textContent=`${PARTS[s.part]} · ${i}/${ORD.length-1}`;$('tbP').style.width=`${i/(ORD.length-1)*100}%`}document.title=s.nav+' · 식물학 책'};
  const tocItem=s=>`<button data-go2="${s.id}" class="${sc&&sc.id===s.id?'cur':''}"><span>${S.star[s.id]?'★ ':''}${s.nav}</span><small>${S.seen[s.id]?'✓ 읽음':''}</small></button>`;
- let PF=0;const PCOL={1:'#2f7d4a',2:'#9a5b34',3:'#ef5b37',4:'#1f1f1f'};
+ let PF=0;const PCOL={0:0,1:'#2f7d4a',2:'#9a5b34',3:'#ef5b37',4:'#1f1f1f'};
  function drawToc(q=''){
   const B=SC.filter(s=>s.part>0),rd=B.filter(s=>S.seen[s.id]).length;$('hmN').textContent=B.length;$('hmR').textContent=`읽은 장 ${rd}`;
   $('hmF').innerHTML=[0,1,2,3,4].map(n=>`<button data-pf="${n}" aria-pressed="${PF===n}">${n?PARTS[n].replace(/^\d부 /,n+'부 · '):'전체'}</button>`).join('');
   let L=SC.filter(s=>(PF?s.part===PF:true)&&(!q||s.nav.includes(q)||s.title.includes(q)||s.def.includes(q)));
-  if(!PF&&!q){const m=L.find(s=>s.part===0);L=L.filter(s=>s.part>0);if(m)L.unshift(m)}
-  $('tocL').innerHTML=L.map((s,i)=>{const hot=s.part>0&&(i%5===1||i%7===4),col=PCOL[s.part]||'#111';
-   return `<button data-go2="${s.id}" class="hc${hot?' hot':''}${s.part===0?' wide':''}${sc&&sc.id===s.id?' cur':''}" style="--pc:${col}"><span class="hc-t"><small>${s.part?PARTS[s.part].split(' ')[0]+' · '+(SC.filter(x=>x.part===s.part).indexOf(s)+1):'시작'}</small><i>${S.seen[s.id]?'✓':'↗'}</i></span><b>${S.star[s.id]?'★ ':''}${s.nav}</b></button>`}).join('')||'<p class="empty">맞는 장이 없어요.</p>';
+  const card=(s,cls='')=>`<button data-go2="${s.id}" class="hc${cls}${sc&&sc.id===s.id?' cur':''}"><span class="hc-t"><small>${s.part?PARTS[s.part].split(' ')[0]+' · '+String(SC.filter(x=>x.part===s.part).indexOf(s)+1).padStart(2,'0'):'시작'}</small><i>${S.seen[s.id]?'✓':'↗'}</i></span><b>${S.star[s.id]?'★ ':''}${s.nav}</b></button>`;
+  let out='';
+  if(!PF&&!q){const f=(S.last&&SC.find(x=>x.id===S.last&&x.part>0))||SC.find(x=>x.part>0&&!S.seen[x.id])||SC[1];
+   out+=`<button data-go2="${f.id}" class="hc feat"><span class="hc-t"><small>${S.last?'이어 읽기':'여기서 시작'}</small><i>→</i></span><b>${f.nav}</b><em>${f.title}</em></button>`;
+   const m=SC.find(x=>x.part===0);if(m)out+=card(m,' wide');}
+  [1,2,3,4].forEach(n=>{const G=L.filter(s=>s.part===n);if(!G.length)return;const all=SC.filter(s=>s.part===n);
+   if(!q)out+=`<div class="hm-s"><b>${PARTS[n]}</b><span>${all.filter(s=>S.seen[s.id]).length}/${all.length}</span></div>`;
+   out+=G.map(s=>card(s)).join('')});
+  $('tocL').innerHTML=out||'<p class="empty">맞는 장이 없어요.</p>';
   $('tabN').textContent=B.length-rd}
  $('hmF').addEventListener('click',e=>{const b=e.target.closest('[data-pf]');if(b){PF=+b.dataset.pf;drawToc($('tocQ').value.trim())}});
  $('hmX').addEventListener('click',()=>closeAll());
